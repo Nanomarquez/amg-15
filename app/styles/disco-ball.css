@@ -1,0 +1,65 @@
+@keyframes rotateDiscoBall {
+  0% { transform: rotateX(90deg) rotateZ(0deg) rotate(0deg); }
+  100% { transform: rotateX(90deg) rotateZ(360deg) rotate(0deg); }
+}
+
+@keyframes rotateDiscoBallMiddle {
+  0% { transform: rotateX(90deg) rotateY(0deg) rotate(0deg); }
+  100% { transform: rotateX(90deg) rotateY(-360deg) rotate(0deg); }
+}
+
+@keyframes reflect {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.disco-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  will-change: transform;
+}
+
+#discoBall {
+  transform-style: preserve-3d;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: rotateDiscoBall 18s linear infinite;
+  will-change: transform;
+}
+
+#discoBallLight {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 100%;
+  background-color: white;
+  opacity: 0.2;
+  filter: blur(30px);
+  will-change: transform;
+}
+
+.square {
+  transform-style: preserve-3d;
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  transform: rotateX(90deg) rotateY(0deg) translateZ(0px);
+}
+
+#discoBallMiddle {
+  height: 100%;
+  border-radius: 100%;
+  background: linear-gradient(to top, #111, #333);
+  position: absolute;
+  animation: rotateDiscoBallMiddle 18s linear infinite;
+} 

@@ -71,7 +71,7 @@ export default function DiscoBall() {
     }, 100);
 
     // Inicializar el audio
-    const audioElement = new Audio('/believer.mp3');
+    const audioElement = new Audio('/badbunny.mp3');
     setAudio(audioElement);
 
     return () => {

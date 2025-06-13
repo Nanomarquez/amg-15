@@ -428,7 +428,7 @@ export default function QuinceaneraInvitation() {
                   </h2>
                   <div className="w-24 h-1 bg-gradient-to-r from-slate-400 to-blue-500 mx-auto mb-8" />
                   <p className="text-gray-600 text-lg">
-                    Gran fiesta gran en el SUM
+                    Gran fiesta en el SUM
                     <br />
                     Calle Marcelino Champagnat 1600
                     <br />

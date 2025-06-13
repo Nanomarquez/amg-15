@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function DiscoBall() {
   const [isVisible, setIsVisible] = useState(true);
   const [opacity, setOpacity] = useState(1);
   const [position, setPosition] = useState(-100);
+  const [showButton, setShowButton] = useState(false);
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     // Crear la bola disco
@@ -64,28 +67,35 @@ export default function DiscoBall() {
     // Animación de caída
     const dropTimer = setTimeout(() => {
       setPosition(0);
+      setShowButton(true);
     }, 100);
 
-    // Desvanecer gradualmente después de llegar al centro
-    const fadeTimer = setTimeout(() => {
-      setOpacity(0);
-    }, 4000);
-
-    // Ocultar completamente después de que termine la transición
-    const hideTimer = setTimeout(() => {
-      setIsVisible(false);
-    }, 6000);
+    // Inicializar el audio
+    const audioElement = new Audio('/believer.mp3');
+    setAudio(audioElement);
 
     return () => {
       clearTimeout(dropTimer);
-      clearTimeout(fadeTimer);
-      clearTimeout(hideTimer);
       const discoBall = document.getElementById("discoBall");
       if (discoBall) {
         discoBall.innerHTML = "";
       }
+      if (audioElement) {
+        audioElement.pause();
+        audioElement.currentTime = 0;
+      }
     };
   }, []);
+
+  const handleEnter = () => {
+    if (audio) {
+      audio.play();
+    }
+    setOpacity(0);
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 3000);
+  };
 
   return (
     <div
@@ -108,6 +118,23 @@ export default function DiscoBall() {
           <div id="discoBallMiddle"></div>
         </div>
       </div>
+      
+      {showButton && (
+        <div 
+          className="absolute bottom-20"
+          style={{
+            opacity: opacity,
+            transition: "opacity 3s ease-in-out"
+          }}
+        >
+          <Button
+            onClick={handleEnter}
+            className="bg-gradient-to-r from-slate-500 to-zinc-600 hover:from-slate-600 hover:to-zinc-700 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+          >
+            Entrar
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
